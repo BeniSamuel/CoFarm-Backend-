@@ -13,6 +13,6 @@ export class Farm {
     @Column()
     location: string;
 
-    @ManyToOne(() => User, (user) => user.farms)
+    @ManyToOne(() => User, (user) => user.farms )
     owner: User;
 }
