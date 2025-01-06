@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Farm } from "./farm.entity";
+import { Message } from "./message.entity";
 
 @Entity()
 export class User {
@@ -14,4 +16,13 @@ export class User {
 
     @Column()
     password: string;
+
+    @OneToMany(() => Farm, (farm) => farm.owner)
+    farms: Farm[];
+
+    @OneToMany(() => Message, (message) => message.sender )
+    sentMessages: Message[];
+
+    @OneToMany(() => Message, (message) => message.receiver )
+    receivedMessages: Message[]
 }

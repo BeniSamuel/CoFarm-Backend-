@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Farm {
@@ -11,4 +12,7 @@ export class Farm {
 
     @Column()
     location: string;
+
+    @ManyToOne(() => User, (user) => user.farms)
+    owner: User;
 }
