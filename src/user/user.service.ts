@@ -14,7 +14,7 @@ export class UserService {
     }
 
     findUser ( email: string ): Promise<User> {
-        const user = this.userRepository.findOne({ where: { name: email }});
+        const user = this.userRepository.findOne({ where: { email: email }});
         return user;
     }
 }
