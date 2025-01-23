@@ -13,6 +13,9 @@ export class Farm {
     @Column()
     location: string;
 
-    @ManyToOne(() => User, (user) => user.farms )
-    owner: User;
+    @Column()
+    size: number;
+
+    @ManyToOne(() => User, (user) => user.farms, { eager: false} )
+    user: User;
 }
