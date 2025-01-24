@@ -12,13 +12,18 @@ export class FarmService {
   ) {}
   // Creating a farm
   addFarm(farmInform: FarmInformDTO, user: User): Promise<Farm> {
-    const newFarm = this.farmRepository.create({ ...farmInform, user });
-    return this.farmRepository.save(newFarm);
+    try {
+      const newFarm = this.farmRepository.create({ ...farmInform, user });
+      return this.farmRepository.save(newFarm);
+    }
+    catch (error) {
+      console.error("Error Occured: ", error)
+    }
   }
 
   // Getting farm for a specific user
   getFarms(user: User): Promise<Farm[]> {
-    return this.farmRepository.find({ where: { user } });
+    return this.farmRepository.find({ where: { id: user.id } });
   }
 
   // Getting single farm
@@ -28,17 +33,17 @@ export class FarmService {
   }
 
   // Updating farm
-  updateFarm(
+  async updateFarm(
     id: number,
     user: User,
     updateFarmInform: FarmInformDTO,
   ): Promise<Farm> {
-    const farm = this.farmRepository.findOne({ where: { id, user } });
+    const farm = await this.farmRepository.findOne({ where: { id, user } });
     if (!farm) {
       throw new Error('Farm Not Found!!');
     }
     Object.assign(farm, updateFarmInform);
-    return this.farmRepository.save(farm);
+    return await this.farmRepository.save(farm);
   }
 
   // Deleting Farm

@@ -30,7 +30,7 @@ export class AuthService {
     }
 
     // Generating the authorization token for the user
-    const payload = { userid: user.id, email: user.email };
+    const payload = { id: user.id, email: user.email };
     return {
       message: 'User Logged in',
       accessToken: await this.jwtService.signAsync(payload),

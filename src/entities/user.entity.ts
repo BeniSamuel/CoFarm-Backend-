@@ -17,7 +17,7 @@ export class User {
     @Column()
     password: string;
 
-    @OneToMany(() => Farm, (farm) => farm.user)
+    @OneToMany(() => Farm, (farm) => farm.user, {eager: true})
     farms: Farm[];
 
     @OneToMany(() => Message, (message) => message.sender )

@@ -12,10 +12,11 @@ export class AuthGuard implements CanActivate {
             const token = this.extractTokenFromHeaders(request);
 
             if (!token) { throw new UnauthorizedException("Not Authorized to perform action") };
-            const payload = await this.jwtService.verifyAsync(token, {secret: "Hello World"})
+            const payload = await this.jwtService.verifyAsync(token, {secret: "hello world"})
             request['user'] = payload;
         }
-        catch {
+        catch (error) {
+            console.error("Authorization Error: ", error);
             throw new UnauthorizedException(
                 { message: "You are not authorized"}
             )

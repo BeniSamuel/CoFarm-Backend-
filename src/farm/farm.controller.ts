@@ -34,7 +34,8 @@ export class FarmController {
     }
 
     @Delete(":id")
-    async deleteFarm (@Param("id") id: string) {
-        return await this.farmService.deleteFarm(id);
+    async deleteFarm (@Param("id") id: string, @Req() req: any ) {
+        const user = req.user;
+        return await this.farmService.deleteFarm(Number(id), user);
     }
 }
