@@ -1,4 +1,17 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Get, Delete } from "@nestjs/common";
 
 @Controller()
-export class NotificationController {}
+export class NotificationController {
+
+    constructor () {};
+
+    @Get("")
+    async getNotifications() {
+
+    }
+
+    @Delete("")
+    async deleteNotifications() {
+
+    }
+}
